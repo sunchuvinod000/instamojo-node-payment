@@ -1,8 +1,15 @@
 const express = require("express");
-const insta = require("instamojo-nodejs");
+
+const Insta = require('instamojo-nodejs');
+
 const bodyparser = require("body-parser");
-const API_KEY= "test_dfef3ec888869f6db66902453b8";
-const AUTH_KEY= "test_be2f17e07d6eba0dd6b50904baf";
+const API_KEY = "test_dfef3ec888869f6db66902453b8";
+const AUTH_KEY = "test_be2f17e07d6eba0dd6b50904baf";
+
+
+Insta.isSandboxMode(true);
+
+
 
 
 const app = express()
@@ -17,17 +24,39 @@ app.get('/',(req,res)=>{
 })
 
 app.post('/pay',(req,res)=>{
-    insta.setKeys(API_KEY, AUTH_KEY);
+    Insta.setKeys(API_KEY, AUTH_KEY);
     const name= req.body.name;
     const email = req.body.email;
     const amount = req.body.amount;
-    res.redirect('index')
+
+    const data = new Insta.PaymentData();
+    const REDIRECT_URL = "https://paise-dey-baba.herokuapp.com/success"
+
+    data.setRedirectUrl(REDIRECT_URL);
+    data.send_email = "True";
+    data.purpose = "testing "
+    data.amount = amount;
+    data.name = name;
+    data.email = email;
+    data.allow_repeated_payments = 'True';
+    Insta.createPayment(data, function (error, response) {
+        if (error) {
+          // some error
+        } else {
+          // Payment redirection link at response.payment_request.longurl
+          res.render("index",{invoice:"Please check your email to make payment"})
+        }
+      });
     
+})
+app.get('/success',(req,res)=>{
+    
+    res.render("index",{success:"Your payment is successful"}) 
 })
 
 
 
 
  app.listen(port,()=>{
-     console.log("listeing");
+     console.log("listeing on port 3000");
  })
