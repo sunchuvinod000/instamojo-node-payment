@@ -6,11 +6,7 @@ const bodyparser = require("body-parser");
 const API_KEY = "test_dfef3ec888869f6db66902453b8";
 const AUTH_KEY = "test_be2f17e07d6eba0dd6b50904baf";
 
-
 Insta.isSandboxMode(true);
-
-
-
 
 const app = express()
 
@@ -18,7 +14,6 @@ app.use(bodyparser.urlencoded({extended:false}));
 app.use(bodyparser.json())
 app.set('view engine','hbs');
 const port = process.env.PORT || 3000;
-
 app.get('/',(req,res)=>{
     res.render('index')
 })
@@ -41,7 +36,7 @@ app.post('/pay',(req,res)=>{
     data.allow_repeated_payments = 'True';
     Insta.createPayment(data, function (error, response) {
         if (error) {
-          // some error
+         console.log(error)
         } else {
           // Payment redirection link at response.payment_request.longurl
           res.render("index",{invoice:"Please check your email to make payment"})
@@ -50,13 +45,12 @@ app.post('/pay',(req,res)=>{
     
 })
 app.get('/success',(req,res)=>{
-    
-    res.render("index",{success:"Your payment is successful"}) 
+     res.render("index",{success:"Your Payment is Successful"}) 
 })
 
 
 
 
  app.listen(port,()=>{
-     console.log("listeing on port 3000");
+     console.log("listeing");
  })
