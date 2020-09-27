@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>
+            Paise-dey-baba
+        </title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    </head>
+    <body>
+        <div class="container row">
+           <div class="container">
+
+            <div class="container">
+            <form action="/pay" method="post">
+
+            
+            <div class="col z-depth-5 s12">
+              <div class="row ">
+                <div class="card-panel teal lighten-2 center"><h3 class="white-text">Paise dey baba</h3></div>
+                <div class="input-field col s12">
+                  <i class="material-icons prefix">person</i>
+                  <input type="text" id="autocomplete-input" name="name" class="autocomplete">
+                  <label for="autocomplete-input">Your Name</label>
+                  
+                </div>
+                
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">email</i>
+                    <input type="email" id="autocomplete-input" name="email" class="autocomplete">
+                    <label for="autocomplete-input">Email</label>
+                  
+                  </div>    
+                  <div class="input-field col s12">
+                    <i class="material-icons prefix">attach_money</i>
+                    <input type="number" id="autocomplete-input" name="amount" class="autocomplete">
+                    <label for="autocomplete-input">Amount</label>
+                  </div>
+                  
+                  <p class="red-text center">{{required}}</p>
+                  <div class="center">
+                  <button type="submit" class="waves-effect waves-light btn ">Initiate Payment</button>
+
+                  </div>
+              </div>
+            </div>
+        </form>
+          </div>
+          </div>
+          </div>
+    </body>
+</html>
