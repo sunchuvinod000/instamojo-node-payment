@@ -23,6 +23,7 @@ app.post('/pay',(req,res)=>{
     const name= req.body.name;
     const email = req.body.email;
     const amount = req.body.amount;
+    if(name && email && amount){
 
     const data = new Insta.PaymentData();
     const REDIRECT_URL = "https://paise-dey-baba.herokuapp.com/success"
@@ -42,6 +43,10 @@ app.post('/pay',(req,res)=>{
           res.render("index",{invoice:"Please check your email to make payment"})
         }
       });
+    }
+    else{
+        res.render("index",{required:"*All feilds are required*"})
+    }
     
 })
 app.get('/success',(req,res)=>{
