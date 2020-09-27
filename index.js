@@ -21,7 +21,7 @@ app.post('/pay',(req,res)=>{
     const name= req.body.name;
     const email = req.body.email;
     const amount = req.body.amount;
-    console.log(amount+name+email)
+    res.redirect('index')
     
 })
 
